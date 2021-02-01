@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MandelbrotAppUWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:skia="using:SkiaSharp.Views.UWP"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -13,6 +13,22 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
+        <Border BorderThickness="1,0,0,0"
+                           Padding="24,0"
+                           BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                           Grid.Row="1">
+            <skia:SKXamlCanvas Name="skiaCanvas"
+                           
+                           IgnorePixelScaling="True"
+                           PaintSurface="skiaCanvas_PaintSurface" 
+                           ManipulationMode="All"
+                           Tapped="skiaCanvas_Tapped"
+                           />
+
+        </Border>
+
+
 
         <CommandBar Opacity="0.6" Grid.Row="0"  Grid.ColumnSpan="2" DefaultLabelPosition="Right">
             <AppBarToggleButton Icon="Shuffle" Label="Shuffle" />

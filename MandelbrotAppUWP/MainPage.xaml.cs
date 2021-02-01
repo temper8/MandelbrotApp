@@ -26,5 +26,15 @@ namespace MandelbrotAppUWP
         {
             this.InitializeComponent();
         }
+
+        private void skiaCanvas_PaintSurface(object sender, SkiaSharp.Views.UWP.SKPaintSurfaceEventArgs e)
+        {
+
+        }
+
+        private void skiaCanvas_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
     }
 }
