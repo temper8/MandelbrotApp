@@ -95,5 +95,52 @@ namespace MandelbrotAppUWP
         {
 
         }
+
+        //----
+
+        private void Draw(int[] data, int width, int height, int iterations, SKColors color)
+        {
+            var bmp = bitmap;
+            for (int i = 0; i < width * height; i++)
+            {
+                int x = i % width;
+                int y = i / width;
+                if (data[i] == iterations)
+                    bmp.SetPixel(x, y, color);
+                else
+                    bmp.SetPixel(x, y, Color.FromArgb((int)(4000000000 / ((data[i] < 1) ? 1 : data[i]))));
+            }
+          //  pictureBox1.Image = bmp;
+        }
+
+
+        private void mandelbrot_CB(object sender, EventArgs e)
+        {
+            int width = bitmap.Width;
+            int height = bitmap.Height;
+            int iterations = 1000;
+            int[] data = new int[width * height];
+
+            //Utils.InitWatch();
+            Mandelbrot.CalcCPU(data, width, height, iterations); // Single thread CPU
+            //Utils.PrintElapsedTime("CPU Mandelbrot");
+            Draw(data, width, height, iterations, SKColors.Blue);
+            /*
+            Mandelbrot.Dispose();
+            Mandelbrot.CompileKernel(false);
+            Utils.InitWatch();
+            Mandelbrot.CalcGPU(data, width, height, iterations); // ILGPU-CPU-Mode
+            Utils.PrintElapsedTime("ILGPU-CPU Mandelbrot");
+            Draw(data, width, height, iterations, Color.Black);
+
+            Mandelbrot.Dispose();
+            Mandelbrot.CompileKernel(true);
+            Utils.InitWatch();
+            Mandelbrot.CalcGPU(data, width, height, iterations); // ILGPU-GPU-Mode
+            Utils.PrintElapsedTime("ILGPU-CUDA Mandelbrot");
+            Draw(data, width, height, iterations, Color.Red);
+            */
+        }
+
     }
 }
