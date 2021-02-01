@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <ToolBar Grid.Row="0">
-            <Button>Run</Button>
+            <Button VerticalAlignment="Stretch" Click="Button_Click">Run</Button>
             
             <Separator></Separator>
             <Separator></Separator>
