@@ -15,14 +15,14 @@
 
         <ToolBar Grid.Row="0">
             <Button VerticalAlignment="Stretch" Click="Button_Click">Run</Button>
-            
-            <Separator></Separator>
             <Separator></Separator>
             <ComboBox SelectedIndex="1">
                 <ComboBoxItem>Single thread CPU</ComboBoxItem>
                 <ComboBoxItem>ILGPU-CPU-Mode</ComboBoxItem>
                 <ComboBoxItem>ILGPU-GPU-Mode</ComboBoxItem>
             </ComboBox>
+            <Separator></Separator>
+            <TextBlock  x:Name="TimeText"  Text="123"/>
         </ToolBar>
 
         <Border BorderThickness="1,0,0,0"

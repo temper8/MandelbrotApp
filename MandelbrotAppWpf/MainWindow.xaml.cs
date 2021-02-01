@@ -111,9 +111,9 @@ namespace MandelbrotAppWpf
             int iterations = 1000;
             int[] data = new int[width * height];
 
-            //Utils.InitWatch();
+            Utils.InitWatch();
             Mandelbrot.CalcCPU(data, width, height, iterations); // Single thread CPU
-            //Utils.PrintElapsedTime("CPU Mandelbrot");
+            TimeText.Text = Utils.GetElapsedTime("CPU Mandelbrot");
             Draw(data, width, height, iterations, SKColors.Blue);
             /*
             Mandelbrot.Dispose();
