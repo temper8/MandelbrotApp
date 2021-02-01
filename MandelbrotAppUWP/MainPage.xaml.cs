@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SkiaSharp;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -29,7 +30,43 @@ namespace MandelbrotAppUWP
 
         private void skiaCanvas_PaintSurface(object sender, SkiaSharp.Views.UWP.SKPaintSurfaceEventArgs e)
         {
+            var surface = e.Surface;
+            var surfaceWidth = e.Info.Width;
+            var surfaceHeight = e.Info.Height;
 
+
+            var canvas = surface.Canvas;
+            /*
+            if (snapshot == null)
+            {
+                canvas.Clear();
+                planeView.Render(canvas);
+                snapshot = surface.Snapshot();
+                SaveSnapshot();
+            }
+            else
+            {
+                canvas.Clear();
+                canvas.DrawImage(snapshot, new SKPoint(0, 0));
+            }
+            */
+
+            var rect = SKRect.Create(10, 10, surfaceWidth - 20 , surfaceHeight - 20);
+
+            // the brush (fill with blue)
+            var paint = new SKPaint
+            {
+                Style = SKPaintStyle.Fill,
+                Color = SKColors.AliceBlue
+            };
+
+
+            canvas.ResetMatrix();
+          //  canvas.Translate(dx, dy);
+            canvas.DrawRect(rect, paint);
+
+
+            canvas.Flush();
         }
 
         private void skiaCanvas_Tapped(object sender, TappedRoutedEventArgs e)
