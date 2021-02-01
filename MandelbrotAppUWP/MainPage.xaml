@@ -9,6 +9,33 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
+        <CommandBar Opacity="0.6" Grid.Row="0"  Grid.ColumnSpan="2" DefaultLabelPosition="Right">
+            <AppBarToggleButton Icon="Shuffle" Label="Shuffle" />
+            <AppBarToggleButton Icon="RepeatAll" Label="Repeat" />
+            <AppBarSeparator/>
+            <AppBarButton Icon="Back" Label="Back" />
+            <AppBarButton Icon="Stop" Label="Stop" />
+            <AppBarButton Icon="Play" Label="Run" />
+            <CommandBar.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Button Margin="5">
+                        <SymbolIcon Symbol="GlobalNavigationButton" />
+                    </Button>
+                    <ComboBox   PlaceholderText="Pick a style" Width="200">
+                        <x:String>Single thread CPU</x:String>
+                        <x:String>ILGPU-CPU-Mode</x:String>
+                        <x:String>ILGPU-GPU-Mode</x:String>
+                    </ComboBox>
+                </StackPanel>
+
+            </CommandBar.Content>
+        
+        </CommandBar>
+        
     </Grid>
 </Page>
