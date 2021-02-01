@@ -48,7 +48,7 @@ namespace MandelbrotAppWpf
             canvas.ResetMatrix();
             canvas.DrawRect(rect, paint);
             if (bitmap != null)
-                canvas.DrawBitmap(bitmap, 20, 20);
+                canvas.DrawBitmap(bitmap, 0, 0);
 
             canvas.Flush();
         }
