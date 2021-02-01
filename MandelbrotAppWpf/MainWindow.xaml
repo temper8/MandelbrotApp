@@ -7,6 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ToolBar Grid.Row="0">
+            <Button>Run</Button>
+            
+            <Separator></Separator>
+            <Separator></Separator>
+            <ComboBox SelectedIndex="1">
+                <ComboBoxItem>Single thread CPU</ComboBoxItem>
+                <ComboBoxItem>ILGPU-CPU-Mode</ComboBoxItem>
+                <ComboBoxItem>ILGPU-GPU-Mode</ComboBoxItem>
+            </ComboBox>
+        </ToolBar>
     </Grid>
 </Window>
