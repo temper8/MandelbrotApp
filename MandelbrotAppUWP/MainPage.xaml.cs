@@ -26,6 +26,28 @@ namespace MandelbrotAppUWP
         public MainPage()
         {
             this.InitializeComponent();
+
+            InitBitmap(500, 500);
+        }
+
+        SKBitmap bitmap;
+        const string TEXT = "Hello, Bitmap!";
+        void InitBitmap(int w, int h)
+        {
+            // Create bitmap and draw on it
+            using (SKPaint textPaint = new SKPaint { TextSize = 48 })
+            {
+                SKRect bounds = new SKRect();
+                textPaint.MeasureText(TEXT, ref bounds);
+
+                bitmap = new SKBitmap(w, h);
+
+                using (SKCanvas bitmapCanvas = new SKCanvas(bitmap))
+                {
+                    bitmapCanvas.Clear();
+                    bitmapCanvas.DrawText(TEXT, w/2 - bounds.Right / 2 , h / 2 - bounds.Top, textPaint);
+                }
+            }
         }
 
         private void skiaCanvas_PaintSurface(object sender, SkiaSharp.Views.UWP.SKPaintSurfaceEventArgs e)
@@ -64,7 +86,7 @@ namespace MandelbrotAppUWP
             canvas.ResetMatrix();
           //  canvas.Translate(dx, dy);
             canvas.DrawRect(rect, paint);
-
+            canvas.DrawBitmap(bitmap, 20, 20);
 
             canvas.Flush();
         }
