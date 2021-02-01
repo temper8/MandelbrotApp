@@ -142,6 +142,7 @@ namespace MandelbrotAppWpf
                     Draw(data, width, height, iterations, SKColors.Red);
                     break;
             }
+            Mandelbrot.Dispose();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
