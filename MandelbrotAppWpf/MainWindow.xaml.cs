@@ -47,11 +47,14 @@ namespace MandelbrotAppWpf
                 }
             }
         }
+
+        int surfaceWidth;
+        int surfaceHeight;
         private void skiaCanvas_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs e)
         {
             var surface = e.Surface;
-            var surfaceWidth = e.Info.Width;
-            var surfaceHeight = e.Info.Height;
+            surfaceWidth = e.Info.Width;
+            surfaceHeight = e.Info.Height;
 
 
             var canvas = surface.Canvas;
@@ -106,6 +109,7 @@ namespace MandelbrotAppWpf
 
         private void mandelbrot_Calc(string mode)
         {
+            bitmap = new SKBitmap(surfaceWidth, surfaceHeight);
             int width = bitmap.Width;
             int height = bitmap.Height;
             int iterations = 1000;
