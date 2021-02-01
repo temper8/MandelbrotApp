@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
         xmlns:local="clr-namespace:MandelbrotAppWpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -23,5 +24,15 @@
                 <ComboBoxItem>ILGPU-GPU-Mode</ComboBoxItem>
             </ComboBox>
         </ToolBar>
+
+        <Border BorderThickness="1,0,0,0"
+                           Padding="24,0"
+                          
+                           Grid.Row="1">
+            <skia:SKElement  Name="skiaCanvas"
+                           IgnorePixelScaling="True"
+                           PaintSurface="skiaCanvas_PaintSurface" 
+                           />
+        </Border>
     </Grid>
 </Window>
