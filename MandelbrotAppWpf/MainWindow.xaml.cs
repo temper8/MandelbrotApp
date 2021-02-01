@@ -130,7 +130,7 @@ namespace MandelbrotAppWpf
                     Utils.InitWatch();
                     Mandelbrot.CalcGPU(data, width, height, iterations); // ILGPU-CPU-Mode
                     TimeText.Text = Utils.GetElapsedTime("ILGPU-CPU Mandelbrot");
-                    Draw(data, width, height, iterations, SKColors.Black);
+                    Draw(data, width, height, iterations, SKColors.AntiqueWhite);
                     break;
 
                 case "ILGPU-GPU-Mode":
