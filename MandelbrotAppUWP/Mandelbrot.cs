@@ -9,10 +9,10 @@
 // Illinois Open Source License. See LICENSE.txt for details.
 // -----------------------------------------------------------------------------
 
-using ILGPU;
-using ILGPU.Runtime;
-using ILGPU.Runtime.CPU;
-using ILGPU.Runtime.Cuda;
+//using ILGPU;
+//using ILGPU.Runtime;
+//using ILGPU.Runtime.CPU;
+//using ILGPU.Runtime.Cuda;
 
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 
 namespace MandelbrotAppUWP
 {
-    class Mandelbrot
+ /*   class Mandelbrot
     {
         /// <summary>
         /// ILGPU kernel for Mandelbrot set.
@@ -156,4 +156,5 @@ namespace MandelbrotAppUWP
 
 
     }
+ */
 }

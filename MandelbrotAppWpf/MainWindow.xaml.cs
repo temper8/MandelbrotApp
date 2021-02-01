@@ -104,37 +104,51 @@ namespace MandelbrotAppWpf
         }
 
 
-        private void mandelbrot_CalcCPU()
+        private void mandelbrot_Calc(string mode)
         {
             int width = bitmap.Width;
             int height = bitmap.Height;
             int iterations = 1000;
             int[] data = new int[width * height];
 
-            Utils.InitWatch();
-            Mandelbrot.CalcCPU(data, width, height, iterations); // Single thread CPU
-            TimeText.Text = Utils.GetElapsedTime("CPU Mandelbrot");
-            Draw(data, width, height, iterations, SKColors.Blue);
-            /*
-            Mandelbrot.Dispose();
-            Mandelbrot.CompileKernel(false);
-            Utils.InitWatch();
-            Mandelbrot.CalcGPU(data, width, height, iterations); // ILGPU-CPU-Mode
-            Utils.PrintElapsedTime("ILGPU-CPU Mandelbrot");
-            Draw(data, width, height, iterations, Color.Black);
+            switch (mode)
+            {
+                case "Single thread CPU":
+                    Utils.InitWatch();
+                    Mandelbrot.CalcCPU(data, width, height, iterations); // Single thread CPU
+                    TimeText.Text = Utils.GetElapsedTime("CPU Mandelbrot");
+                    Draw(data, width, height, iterations, SKColors.Blue);
+                    break;
 
-            Mandelbrot.Dispose();
-            Mandelbrot.CompileKernel(true);
-            Utils.InitWatch();
-            Mandelbrot.CalcGPU(data, width, height, iterations); // ILGPU-GPU-Mode
-            Utils.PrintElapsedTime("ILGPU-CUDA Mandelbrot");
-            Draw(data, width, height, iterations, Color.Red);
-            */
+                case "ILGPU-CPU-Mode":
+                   // Mandelbrot.Dispose();
+                    Mandelbrot.CompileKernel(false);
+                    Utils.InitWatch();
+                    Mandelbrot.CalcGPU(data, width, height, iterations); // ILGPU-CPU-Mode
+                    TimeText.Text = Utils.GetElapsedTime("ILGPU-CPU Mandelbrot");
+                    Draw(data, width, height, iterations, SKColors.Black);
+                    break;
+
+                case "ILGPU-GPU-Mode":
+                   // Mandelbrot.Dispose();
+                    Mandelbrot.CompileKernel(true);
+                    Utils.InitWatch();
+                    Mandelbrot.CalcGPU(data, width, height, iterations); // ILGPU-GPU-Mode
+                    TimeText.Text = Utils.GetElapsedTime("ILGPU-CUDA Mandelbrot");
+                    Draw(data, width, height, iterations, SKColors.Red);
+                    break;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            mandelbrot_CalcCPU();
+            string mode = "Single thread CPU";
+            ComboBoxItem selectedItem = (ComboBoxItem)CalcMode_ComboBox.SelectedItem;
+            if (selectedItem != null)
+                mode = selectedItem.Content.ToString();
+
+            mandelbrot_Calc(mode);
+
             skiaCanvas.InvalidateVisual();
         }
     }

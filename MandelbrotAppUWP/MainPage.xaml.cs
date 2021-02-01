@@ -98,7 +98,7 @@ namespace MandelbrotAppUWP
 
         //----
 
-        private void Draw(int[] data, int width, int height, int iterations, SKColors color)
+        private void Draw(int[] data, int width, int height, int iterations, SKColor color)
         {
             var bmp = bitmap;
             for (int i = 0; i < width * height; i++)
@@ -108,7 +108,7 @@ namespace MandelbrotAppUWP
                 if (data[i] == iterations)
                     bmp.SetPixel(x, y, color);
                 else
-                    bmp.SetPixel(x, y, Color.FromArgb((int)(4000000000 / ((data[i] < 1) ? 1 : data[i]))));
+                    bmp.SetPixel(x, y, new SkiaSharp.SKColor((UInt32)(4000000000 / ((data[i] < 1) ? 1 : data[i]))));
             }
           //  pictureBox1.Image = bmp;
         }
@@ -122,9 +122,9 @@ namespace MandelbrotAppUWP
             int[] data = new int[width * height];
 
             //Utils.InitWatch();
-            Mandelbrot.CalcCPU(data, width, height, iterations); // Single thread CPU
+         //   Mandelbrot.CalcCPU(data, width, height, iterations); // Single thread CPU
             //Utils.PrintElapsedTime("CPU Mandelbrot");
-            Draw(data, width, height, iterations, SKColors.Blue);
+        //    Draw(data, width, height, iterations, SKColors.Blue);
             /*
             Mandelbrot.Dispose();
             Mandelbrot.CompileKernel(false);

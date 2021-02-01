@@ -16,7 +16,7 @@
         <ToolBar Grid.Row="0">
             <Button VerticalAlignment="Stretch" Click="Button_Click">Run</Button>
             <Separator></Separator>
-            <ComboBox SelectedIndex="1">
+            <ComboBox x:Name="CalcMode_ComboBox" SelectedIndex="1">
                 <ComboBoxItem>Single thread CPU</ComboBoxItem>
                 <ComboBoxItem>ILGPU-CPU-Mode</ComboBoxItem>
                 <ComboBoxItem>ILGPU-GPU-Mode</ComboBoxItem>
