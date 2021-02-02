@@ -55,24 +55,27 @@ namespace MandelbrotAppWpf
 
         private void Draw(int[] data, int width, int height, int iterations, SKColor color)
         {
-            var bmp = bitmap;
+            var pixels = new SKColor[width * height];
+
             for (int i = 0; i < width * height; i++)
             {
-                int x = i % width;
-                int y = i / width;
                 if (data[i] == iterations)
-                    bmp.SetPixel(x, y, color);
+                    pixels[i] = color;
                 else
-                    bmp.SetPixel(x, y, new SkiaSharp.SKColor((UInt32)(4000000000 / ((data[i] < 1) ? 1 : data[i]))));
+                    pixels[i] =  new SkiaSharp.SKColor((UInt32)(4000000000 / ((data[i] < 1) ? 1 : data[i])));
             }
+
+            bitmap = new SKBitmap(width, height);
+            bitmap.Pixels = pixels;
+
         }
 
 
         private void mandelbrot_Calc(string mode)
         {
-            bitmap = new SKBitmap(surfaceWidth, surfaceHeight);
-            int width = bitmap.Width;
-            int height = bitmap.Height;
+            
+            int width = surfaceWidth;
+            int height = surfaceHeight;
             int iterations = 1000;
             int[] data = new int[width * height];
 
