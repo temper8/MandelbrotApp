@@ -13,6 +13,8 @@ namespace MandelbrotAppWpf
 {
     class MandelbrotVariable
     {
+
+
         /// <summary>
         /// ILGPU kernel for Mandelbrot set.
         /// </summary>
@@ -23,7 +25,7 @@ namespace MandelbrotAppWpf
         /// <param name="output"></param>
         static void MandelbrotKernel(
             Index1 index,
-            float pos,
+            float x, float y,
             int width, int height, int max_iterations,
             ArrayView<int> output)
         {
@@ -40,8 +42,8 @@ namespace MandelbrotAppWpf
 
             float x0 = h_a + img_x * (h_b - h_a) / width;
             float y0 = v_a + img_y * (v_b - v_a) / height;
-            float x = pos;
-            float y = pos;
+          //  var (x,y) = fun1(pos);
+ 
             int iteration = 0;
             while ((x * x + y * y < 2 * 2) && (iteration < max_iterations))
             {
@@ -56,7 +58,7 @@ namespace MandelbrotAppWpf
 
         private static Context context;
         private static Accelerator accelerator;
-        private static System.Action<Index1, float, int, int, int, ArrayView<int>> mandelbrot_kernel;
+        private static System.Action<Index1, float,float, int, int, int, ArrayView<int>> mandelbrot_kernel;
 
         /// <summary>
         /// Compile the mandelbrot kernel in ILGPU-CPU or ILGPU-CUDA mode.
@@ -71,7 +73,7 @@ namespace MandelbrotAppWpf
                 accelerator = new CPUAccelerator(context);
 
             mandelbrot_kernel = accelerator.LoadAutoGroupedStreamKernel<
-                Index1, float, int, int, int, ArrayView<int>>(MandelbrotKernel);
+                Index1, float, float, int, int, int, ArrayView<int>>(MandelbrotKernel);
         }
 
         /// <summary>
@@ -90,13 +92,13 @@ namespace MandelbrotAppWpf
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <param name="max_iterations"></param>
-        public static void CalcGPU(int[] buffer,float pos, int width, int height, int max_iterations)
+        public static void CalcGPU(int[] buffer,float x,float y, int width, int height, int max_iterations)
         {
             int num_values = buffer.Length;
             var dev_out = accelerator.Allocate<int>(num_values);
 
             // Launch kernel
-            mandelbrot_kernel(num_values, pos, width, height, max_iterations, dev_out.View);
+            mandelbrot_kernel(num_values, x, y, width, height, max_iterations, dev_out.View);
             accelerator.Synchronize();
             dev_out.CopyTo(buffer, 0, 0, num_values);
 
