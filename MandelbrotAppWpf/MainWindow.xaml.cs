@@ -70,7 +70,6 @@ namespace MandelbrotAppWpf
 
         }
 
-
         private void mandelbrot_Calc(string mode)
         {
             
