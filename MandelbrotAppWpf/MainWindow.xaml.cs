@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace MandelbrotAppWpf
 {
@@ -144,24 +146,37 @@ namespace MandelbrotAppWpf
             Utils.InitWatch();
             MandelbrotVariable.CalcGPU(data, x,y, width, height, iterations); // ILGPU-GPU-Mode
             Draw(data, width, height, iterations, SKColors.Red);
-            TimeText.Text = Utils.GetElapsedTime("ILGPU-CUDA Mandelbrot + Draw: ");
+            //TimeText.Text = Utils.GetElapsedTime("ILGPU-CUDA Mandelbrot + Draw: ");
         }
         public static void DoEvents()
         {
             System.Windows.Application.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Background,
                                                   new Action(delegate { }));
         }
+        private void UpdateCanvas()
+        {
+            System.Windows.Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal,
+               (ThreadStart) delegate () { skiaCanvas.InvalidateVisual(); }
+            );
+        }
+        async void DoAnimation()
+        {
+            await Task.Run(() => 
+                                 {
+                                     var N =1500;
+                                     MandelbrotVariable.CompileKernel(true);
+                                     for (var i = 0; i < N; i++)
+                                     {
+                                         MandVar_Calc(i * 2.0f / N);
+
+                                         UpdateCanvas();
+                                     }
+                                     MandelbrotVariable.Dispose();
+                                 }).ConfigureAwait(false);
+        }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var N = 500;
-            MandelbrotVariable.CompileKernel(true);
-            for (var i =0; i<N; i++)
-            {
-                MandVar_Calc(i * 2.0f / N);
-                skiaCanvas.InvalidateVisual();
-                DoEvents();
-            }
-            MandelbrotVariable.Dispose();
+            DoAnimation();
         }
     }
 }
