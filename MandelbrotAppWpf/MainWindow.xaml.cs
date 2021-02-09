@@ -64,7 +64,14 @@ namespace MandelbrotAppWpf
                 if (data[i] == iterations)
                     pixels[i] = color;
                 else
-                    pixels[i] =  new SkiaSharp.SKColor((UInt32)(4000000000 / ((data[i] < 1) ? 1 : data[i])));
+                {
+                    float c = (float)((double)iterations / ((data[i] < 1) ? 1 : data[i]));
+                    
+                    //pixels[i] = SkiaSharp.SKColor.FromHsv(1.0f, 1.0f, c);
+                    pixels[i] = SkiaSharp.SKColor.FromHsl(1.0f, 1.0f, c);
+                    //        pixels[i] =  new SkiaSharp.SKColor((UInt32)(4000000000 / ((data[i] < 1) ? 1 : data[i])));
+                }
+
             }
 
             bitmap = new SKBitmap(width, height);
@@ -145,7 +152,7 @@ namespace MandelbrotAppWpf
             var (x, y) = fun2(pos);
             Utils.InitWatch();
             MandelbrotVariable.CalcGPU(data, x,y, width, height, iterations); // ILGPU-GPU-Mode
-            Draw(data, width, height, iterations, SKColors.Red);
+            Draw(data, width, height, iterations, SkiaSharp.SKColor.FromHsv(1.0f, 1.0f, 1.0f, 255));
             //TimeText.Text = Utils.GetElapsedTime("ILGPU-CUDA Mandelbrot + Draw: ");
         }
         public static void DoEvents()
@@ -163,7 +170,7 @@ namespace MandelbrotAppWpf
         {
             await Task.Run(() => 
                                  {
-                                     var N =1500;
+                                     var N = 1000;
                                      MandelbrotVariable.CompileKernel(true);
                                      for (var i = 0; i < N; i++)
                                      {
