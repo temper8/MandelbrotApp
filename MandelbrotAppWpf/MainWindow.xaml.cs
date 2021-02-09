@@ -118,7 +118,7 @@ namespace MandelbrotAppWpf
             skiaCanvas.InvalidateVisual();
         }
 
-        static (float, float) fun1(float pos)
+        (float, float) fun1(float pos)
         {
             float a = 0.5f;
             float x = a * (float)Math.Cos(Math.PI * pos);
@@ -126,11 +126,11 @@ namespace MandelbrotAppWpf
             return (x, y);
         }
 
-        static (float, float) fun2(float pos)
+        (float, float) fun2(float pos)
         {
             var a = Math.Sqrt(pos);
-            float x = (float) (a * Math.Sin(4*Math.PI * pos));
-            float y = (float) (a * Math.Cos(4*Math.PI * pos));
+            float x = (float) (a * Math.Sin(4*Math.PI * a));
+            float y = (float) (a * Math.Cos(4*Math.PI * a));
             return (x, y);
         }
 
@@ -141,14 +141,10 @@ namespace MandelbrotAppWpf
             int iterations = 1000;
             int[] data = new int[width * height];
             var (x, y) = fun2(pos);
-
-            MandelbrotVariable.CompileKernel(true);
             Utils.InitWatch();
             MandelbrotVariable.CalcGPU(data, x,y, width, height, iterations); // ILGPU-GPU-Mode
-            TimeText.Text = Utils.GetElapsedTime("ILGPU-CUDA Mandelbrot");
             Draw(data, width, height, iterations, SKColors.Red);
-
-            MandelbrotVariable.Dispose();
+            TimeText.Text = Utils.GetElapsedTime("ILGPU-CUDA Mandelbrot + Draw: ");
         }
         public static void DoEvents()
         {
@@ -158,12 +154,14 @@ namespace MandelbrotAppWpf
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var N = 500;
-            for(var i =0; i<N; i++)
+            MandelbrotVariable.CompileKernel(true);
+            for (var i =0; i<N; i++)
             {
                 MandVar_Calc(i * 2.0f / N);
                 skiaCanvas.InvalidateVisual();
                 DoEvents();
             }
+            MandelbrotVariable.Dispose();
         }
     }
 }
