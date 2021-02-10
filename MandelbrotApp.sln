@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MandelbrotAppUWP", "Mandelb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MandelbrotAppWpf", "MandelbrotAppWpf\MandelbrotAppWpf.csproj", "{04765793-5189-4145-8909-7202D88690A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MandelbrotCore", "MandelbrotCore\MandelbrotCore.csproj", "{F7FF9339-0298-495B-879C-FF971AE1FBE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,26 @@ Global
 		{04765793-5189-4145-8909-7202D88690A7}.Release|x64.Build.0 = Release|Any CPU
 		{04765793-5189-4145-8909-7202D88690A7}.Release|x86.ActiveCfg = Release|Any CPU
 		{04765793-5189-4145-8909-7202D88690A7}.Release|x86.Build.0 = Release|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Debug|ARM.Build.0 = Debug|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Debug|x64.Build.0 = Debug|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Debug|x86.Build.0 = Debug|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Release|ARM.ActiveCfg = Release|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Release|ARM.Build.0 = Release|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Release|ARM64.Build.0 = Release|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Release|x64.ActiveCfg = Release|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Release|x64.Build.0 = Release|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Release|x86.ActiveCfg = Release|Any CPU
+		{F7FF9339-0298-495B-879C-FF971AE1FBE6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
