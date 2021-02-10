@@ -3,10 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
         xmlns:local="clr-namespace:MandelbrotAppWpfNet5"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="700" Width="900">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
+        <ToolBar Grid.Row="0">
+            <Button VerticalAlignment="Stretch" Click="Button_Click_1">Dev</Button>
+
+            <Button VerticalAlignment="Stretch" Click="Button_Click">Run</Button>
+            <Separator></Separator>
+            <ComboBox x:Name="CalcMode_ComboBox" SelectedIndex="1">
+                <ComboBoxItem>Single thread CPU</ComboBoxItem>
+                <ComboBoxItem>ILGPU-CPU-Mode</ComboBoxItem>
+                <ComboBoxItem>ILGPU-GPU-Mode</ComboBoxItem>
+            </ComboBox>
+            <Separator></Separator>
+            <TextBlock  x:Name="TimeText"  Text="123"/>
+        </ToolBar>
+
+        <Border BorderThickness="1,0,0,0"
+                           Padding="24,0"
+                          
+                           Grid.Row="1">
+            <skia:SKElement  Name="skiaCanvas"
+                           IgnorePixelScaling="True"
+                           PaintSurface="skiaCanvas_PaintSurface" 
+                           />
+        </Border>
     </Grid>
 </Window>
